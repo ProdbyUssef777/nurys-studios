@@ -28,8 +28,8 @@ export const site = {
   // Replace with the real inbox before launch.
   email: 'hello@nurys.studio',
   instagram: {
-    handle: '@nuryslab',
-    url: 'https://instagram.com/nuryslab',
+    handle: '@nurys.studio',
+    url: 'https://instagram.com/nurys.studio',
   },
 
   // Leave empty until real platform pages exist — buttons for

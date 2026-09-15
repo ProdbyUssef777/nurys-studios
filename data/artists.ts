@@ -37,7 +37,7 @@ export const artists: Artist[] = [
     roles: ['Music Producer'],
     category: 'producer',
     bio: 'Foundational producer of the NURYS collective, shaping the label\u2019s early sonic identity.',
-    image: '/img/artists/ussef777.svg',
+    image: '/img/artists/ussef777.jpg',
   },
   {
     slug: '2mon666',
