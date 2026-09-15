@@ -3,7 +3,8 @@
 // Add a new visual project by adding one object to this array.
 // `category` drives the filter on /visuals: 'video' | 'photo' |
 // 'film' | 'direction' | 'design'.
-// `orientation` controls the grid card's aspect ratio.
+// `aspect` is the image's true width/height ratio — used so the
+// card's shape always matches the photo, with no cropping.
 // ────────────────────────────────────────────────────────────
 
 export type VisualCategory = 'video' | 'photo' | 'film' | 'direction' | 'design';
@@ -13,7 +14,9 @@ export interface Visual {
   title: string;
   credit: string;
   category: VisualCategory;
-  orientation: 'portrait' | 'landscape' | 'square';
+  // Exact width/height ratio of the source image (e.g. 1280/960).
+  // Drives the card's shape so nothing gets cropped or stretched.
+  aspect: number;
   image: string;
 }
 
@@ -23,7 +26,7 @@ export const visuals: Visual[] = [
     title: 'Untitled Frame 01',
     credit: 'Photography — ANYS',
     category: 'photo',
-    orientation: 'landscape',
+    aspect: 1.3333,
     image: '/img/visuals/anys-visual-01.jpg',
   },
   {
@@ -31,7 +34,7 @@ export const visuals: Visual[] = [
     title: 'Untitled Frame 02',
     credit: 'Photography — ANYS',
     category: 'photo',
-    orientation: 'portrait',
+    aspect: 0.7500,
     image: '/img/visuals/anys-visual-02.jpg',
   },
   {
@@ -39,7 +42,7 @@ export const visuals: Visual[] = [
     title: 'Untitled Frame 03',
     credit: 'Photography — ANYS',
     category: 'photo',
-    orientation: 'landscape',
+    aspect: 1.3347,
     image: '/img/visuals/anys-visual-03.jpg',
   },
   {
@@ -47,7 +50,7 @@ export const visuals: Visual[] = [
     title: 'Untitled Frame 04',
     credit: 'Photography — ANYS',
     category: 'photo',
-    orientation: 'portrait',
+    aspect: 0.6664,
     image: '/img/visuals/anys-visual-04.jpg',
   },
   {
@@ -55,7 +58,7 @@ export const visuals: Visual[] = [
     title: 'Untitled Frame 05',
     credit: 'Photography — ANYS',
     category: 'photo',
-    orientation: 'portrait',
+    aspect: 0.7500,
     image: '/img/visuals/anys-visual-05.jpg',
   },
   {
@@ -63,7 +66,7 @@ export const visuals: Visual[] = [
     title: 'Untitled Frame 06',
     credit: 'Photography — ANYS',
     category: 'photo',
-    orientation: 'landscape',
+    aspect: 1.3347,
     image: '/img/visuals/anys-visual-06.jpg',
   },
   {
@@ -71,7 +74,7 @@ export const visuals: Visual[] = [
     title: 'Untitled Frame 07',
     credit: 'Photography — ANYS',
     category: 'photo',
-    orientation: 'landscape',
+    aspect: 1.3333,
     image: '/img/visuals/anys-visual-07.jpg',
   },
   {
@@ -79,7 +82,7 @@ export const visuals: Visual[] = [
     title: 'Untitled Frame 08',
     credit: 'Photography — ANYS',
     category: 'photo',
-    orientation: 'portrait',
+    aspect: 0.7492,
     image: '/img/visuals/anys-visual-08.jpg',
   },
 ];

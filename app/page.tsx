@@ -132,7 +132,7 @@ export default function HomePage() {
             </div>
           </Reveal>
 
-          <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+          <div className="mt-12 grid grid-cols-2 items-start gap-4 md:grid-cols-4 md:gap-6">
             {featuredVisuals.map((visual) => (
               <VisualCard key={visual.slug} visual={visual} />
             ))}

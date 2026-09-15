@@ -33,7 +33,7 @@ export default function VisualGallery({ visuals }: { visuals: Visual[] }) {
         ))}
       </div>
 
-      <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
+      <div className="mt-10 grid grid-cols-2 items-start gap-4 md:grid-cols-3 md:gap-6">
         {visible.map((visual) => (
           <VisualCard key={visual.slug} visual={visual} />
         ))}
