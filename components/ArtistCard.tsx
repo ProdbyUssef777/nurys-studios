@@ -11,7 +11,7 @@ export default function ArtistCard({ artist }: { artist: Artist }) {
           alt={artist.name}
           fill
           sizes="(min-width: 768px) 25vw, 50vw"
-          className="object-cover transition-transform duration-700 ease-editorial group-hover:scale-105"
+          className="object-cover transition-transform duration-700 ease-editorial group-hover:scale-110"
         />
         <div className="absolute inset-0 flex items-end bg-gradient-to-t from-ink/80 via-transparent to-transparent p-5 opacity-0 transition-opacity duration-500 ease-editorial group-hover:opacity-100">
           <p className="text-xs tracking-wide2 text-bone">{artist.roles.join(' / ')}</p>

@@ -25,7 +25,7 @@ export default function JournalPage() {
                   alt={entry.title}
                   fill
                   sizes="(min-width: 768px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-700 ease-editorial group-hover:scale-105"
+                  className="object-cover transition-transform duration-700 ease-editorial group-hover:scale-110"
                 />
               </div>
               <p className="mt-5 text-xs tracking-wide2 text-smoke">

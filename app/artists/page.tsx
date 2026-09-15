@@ -31,13 +31,13 @@ export default function ArtistsPage() {
               <div className="mt-10 grid grid-cols-1 gap-16 md:grid-cols-2">
                 {group.map((artist) => (
                   <div key={artist.slug} id={artist.slug} className="grid grid-cols-[minmax(0,140px)_1fr] gap-6 scroll-mt-32 md:grid-cols-[minmax(0,180px)_1fr]">
-                    <div className="relative aspect-[4/5] overflow-hidden bg-void">
+                    <div className="group relative aspect-[4/5] overflow-hidden bg-void">
                       <Image
                         src={artist.image}
                         alt={artist.name}
                         fill
                         sizes="180px"
-                        className="object-cover"
+                        className="object-cover transition-transform duration-700 ease-editorial group-hover:scale-110"
                       />
                     </div>
                     <div>
@@ -58,7 +58,7 @@ export default function ArtistsPage() {
                                 alt={`${artist.name} — photo`}
                                 fill
                                 sizes="120px"
-                                className="object-cover transition-transform duration-700 ease-editorial hover:scale-105"
+                                className="object-cover transition-transform duration-700 ease-editorial hover:scale-110"
                               />
                             </div>
                           ))}

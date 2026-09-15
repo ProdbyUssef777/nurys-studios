@@ -45,7 +45,7 @@ export const artists: Artist[] = [
     roles: ['Music Producer', 'Artist'],
     category: 'producer',
     bio: 'Producer and artist working across production and performance for the NURYS movement.',
-    image: '/img/artists/2mon666.svg',
+    image: '/img/artists/2mon666.jpg',
   },
   {
     slug: 'anys',
