@@ -16,7 +16,7 @@ export default function VisualCard({ visual }: { visual: Visual }) {
           alt={visual.title}
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="object-cover grayscale transition-transform duration-700 ease-editorial group-hover:scale-105"
+          className="object-cover transition-transform duration-700 ease-editorial group-hover:scale-105"
         />
       </div>
       <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-ink/90 to-transparent p-5 opacity-0 transition-all duration-500 ease-editorial group-hover:translate-y-0 group-hover:opacity-100">

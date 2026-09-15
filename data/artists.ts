@@ -78,7 +78,7 @@ export const artists: Artist[] = [
     roles: ['Video Editor', 'Filmmaker'],
     category: 'creative',
     bio: 'Video editor and filmmaker building the visual world around NURYS releases.',
-    image: '/img/artists/vali.svg',
+    image: '/img/artists/vali.jpg',
   },
 ];
 

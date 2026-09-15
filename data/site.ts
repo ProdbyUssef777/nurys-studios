@@ -26,7 +26,7 @@ export const site = {
 
   // ── Contact ──────────────────────────────────────────────
   // Replace with the real inbox before launch.
-  email: 'hello@nurys.studio',
+  email: 'nurysstudios@gmail.com',
   instagram: {
     handle: '@nurys.studio',
     url: 'https://instagram.com/nurys.studio',

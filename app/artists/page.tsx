@@ -37,7 +37,7 @@ export default function ArtistsPage() {
                         alt={artist.name}
                         fill
                         sizes="180px"
-                        className="object-cover grayscale"
+                        className="object-cover"
                       />
                     </div>
                     <div>
@@ -58,7 +58,7 @@ export default function ArtistsPage() {
                                 alt={`${artist.name} — photo`}
                                 fill
                                 sizes="120px"
-                                className="object-cover grayscale transition-transform duration-700 ease-editorial hover:scale-105"
+                                className="object-cover transition-transform duration-700 ease-editorial hover:scale-105"
                               />
                             </div>
                           ))}

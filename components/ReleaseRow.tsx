@@ -18,7 +18,7 @@ export default function ReleaseRow({ release }: { release: Release }) {
           alt={`${release.title} artwork`}
           fill
           sizes="120px"
-          className="object-cover grayscale transition-transform duration-700 ease-editorial group-hover:scale-105"
+          className="object-cover transition-transform duration-700 ease-editorial group-hover:scale-105"
         />
       </div>
 
