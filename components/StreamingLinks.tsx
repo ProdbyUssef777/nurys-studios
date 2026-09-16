@@ -1,12 +1,20 @@
 export default function StreamingLinks({
   links,
 }: {
-  links: { spotify?: string; appleMusic?: string; youtube?: string };
+  links: {
+    spotify?: string;
+    appleMusic?: string;
+    youtube?: string;
+    deezer?: string;
+    iheart?: string;
+  };
 }) {
   const entries: { label: string; href?: string }[] = [
     { label: 'Spotify', href: links.spotify },
     { label: 'Apple Music', href: links.appleMusic },
     { label: 'YouTube', href: links.youtube },
+    { label: 'Deezer', href: links.deezer },
+    { label: 'iHeart', href: links.iheart },
   ].filter((e) => e.href);
 
   if (entries.length === 0) {

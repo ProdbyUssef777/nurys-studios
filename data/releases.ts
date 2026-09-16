@@ -23,19 +23,26 @@ export interface Release {
     spotify?: string;
     appleMusic?: string;
     youtube?: string;
+    deezer?: string;
+    iheart?: string;
   };
 }
 
 export const releases: Release[] = [
   {
-    slug: 'placeholder-single-01',
-    title: 'Untitled Session 01',
-    artist: '2MON666',
+    slug: '2gb',
+    title: '2GB',
+    artist: 'Ussef777 ft. 2MON666',
     year: 2026,
     type: 'single',
-    credits: 'Produced by USSEF777',
-    cover: '/img/releases/release-01.svg',
-    links: {},
+    credits: 'Produced by Ussef777 & 2mon666',
+    cover: '/img/releases/2gb.jpg',
+    links: {
+      spotify: 'https://open.spotify.com/album/5zdfJc935sveuQ8Kjd9dDz',
+      appleMusic: 'https://music.apple.com/us/album/2gb-feat-2mon666-single/6776856507',
+      deezer: 'https://www.deezer.com/album/998685461',
+      iheart: 'https://www.iheart.com/artist/id-41135763/albums/id-406979943',
+    },
   },
   {
     slug: 'placeholder-single-02',
