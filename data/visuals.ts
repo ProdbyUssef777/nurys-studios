@@ -18,9 +18,22 @@ export interface Visual {
   // Drives the card's shape so nothing gets cropped or stretched.
   aspect: number;
   image: string;
+  // Optional external link (e.g. YouTube) — set for music videos so
+  // the thumbnail opens the video in a new tab. Leave unset for
+  // plain photos.
+  url?: string;
 }
 
 export const visuals: Visual[] = [
+  {
+    slug: '2gb-music-video',
+    title: '2GB (Music Video)',
+    credit: 'Ussef777 ft. 2MON666',
+    category: 'video',
+    aspect: 1.7778,
+    image: '/img/visuals/2gb-music-video.jpg',
+    url: 'https://www.youtube.com/watch?v=reB1cd11etU',
+  },
   {
     slug: 'anys-visual-01',
     title: 'Golden Silhouette',
