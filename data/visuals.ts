@@ -23,7 +23,7 @@ export interface Visual {
 export const visuals: Visual[] = [
   {
     slug: 'anys-visual-01',
-    title: 'Untitled Frame 01',
+    title: 'Golden Silhouette',
     credit: 'Photography — ANYS',
     category: 'photo',
     aspect: 1.3333,
@@ -31,7 +31,7 @@ export const visuals: Visual[] = [
   },
   {
     slug: 'anys-visual-02',
-    title: 'Untitled Frame 02',
+    title: 'Dark Ocean Waves',
     credit: 'Photography — ANYS',
     category: 'photo',
     aspect: 0.7500,
@@ -39,7 +39,7 @@ export const visuals: Visual[] = [
   },
   {
     slug: 'anys-visual-03',
-    title: 'Untitled Frame 03',
+    title: 'Ocean Sunset',
     credit: 'Photography — ANYS',
     category: 'photo',
     aspect: 1.3347,
@@ -47,7 +47,7 @@ export const visuals: Visual[] = [
   },
   {
     slug: 'anys-visual-04',
-    title: 'Untitled Frame 04',
+    title: 'Blue Crescent Moon',
     credit: 'Photography — ANYS',
     category: 'photo',
     aspect: 0.6664,
@@ -55,7 +55,7 @@ export const visuals: Visual[] = [
   },
   {
     slug: 'anys-visual-05',
-    title: 'Untitled Frame 05',
+    title: 'Sunset Street Lamps',
     credit: 'Photography — ANYS',
     category: 'photo',
     aspect: 0.7500,
@@ -63,7 +63,7 @@ export const visuals: Visual[] = [
   },
   {
     slug: 'anys-visual-06',
-    title: 'Untitled Frame 06',
+    title: 'Dark Orange Horizon',
     credit: 'Photography — ANYS',
     category: 'photo',
     aspect: 1.3347,
@@ -71,7 +71,7 @@ export const visuals: Visual[] = [
   },
   {
     slug: 'anys-visual-07',
-    title: 'Untitled Frame 07',
+    title: 'Blue City Night',
     credit: 'Photography — ANYS',
     category: 'photo',
     aspect: 1.3333,
@@ -79,7 +79,7 @@ export const visuals: Visual[] = [
   },
   {
     slug: 'anys-visual-08',
-    title: 'Untitled Frame 08',
+    title: 'Golden Ocean',
     credit: 'Photography — ANYS',
     category: 'photo',
     aspect: 0.7492,
