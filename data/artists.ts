@@ -65,6 +65,7 @@ export const artists: Artist[] = [
     category: 'creative',
     bio: 'Multidisciplinary creative shaping the visual language of NURYS across design, photography and film.',
     image: '/img/artists/anys.jpg',
+    social: { instagram: '@anysthereal_' },
   },
   {
     slug: '24snake',
