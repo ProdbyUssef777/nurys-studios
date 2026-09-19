@@ -4,7 +4,7 @@
 // page (Home, Artists, roster filters) reads from here.
 //
 // `category` controls where they're grouped on /artists:
-//   'artist' | 'producer' | 'creative'
+//   'artist' | 'producer' | 'creative' | 'engineer'
 // A person can hold more than one role in `roles`, but only
 // one `category` for grouping purposes.
 //
@@ -13,7 +13,7 @@
 // it will replace the placeholder automatically.
 // ────────────────────────────────────────────────────────────
 
-export type ArtistCategory = 'artist' | 'producer' | 'creative';
+export type ArtistCategory = 'artist' | 'producer' | 'creative' | 'engineer';
 
 export interface Artist {
   slug: string;
@@ -36,8 +36,9 @@ export const artists: Artist[] = [
     name: 'USSEF777',
     roles: ['Music Producer'],
     category: 'producer',
-    bio: 'Foundational producer of the NURYS collective, shaping the label\u2019s early sonic identity.',
+    bio: 'Foundational producer of the NURYS collective, shaping the label’s early sonic identity.',
     image: '/img/artists/ussef777.jpg',
+    social: { instagram: '@ussef.beat777' },
   },
   {
     slug: '2mon666',
@@ -46,6 +47,16 @@ export const artists: Artist[] = [
     category: 'producer',
     bio: 'Producer and artist working across production and performance for the NURYS movement.',
     image: '/img/artists/2mon666.jpg',
+    social: { instagram: '@2mon666' },
+  },
+  {
+    slug: 'shxtgunwav',
+    name: 'SHXTGUN.WAV',
+    roles: ['Music Producer'],
+    category: 'producer',
+    bio: 'Producer bringing a new sonic direction to the NURYS roster.',
+    image: '/img/artists/shxtgunwav.svg',
+    social: { instagram: '@shxtgun.wav' },
   },
   {
     slug: 'anys',
@@ -71,6 +82,7 @@ export const artists: Artist[] = [
       '/img/artists/24snake-gallery/24snake-06.jpg',
       '/img/artists/24snake-gallery/24snake-07.jpg',
     ],
+    social: { instagram: '@24.snake' },
   },
   {
     slug: 'vali',
@@ -79,6 +91,16 @@ export const artists: Artist[] = [
     category: 'creative',
     bio: 'Video editor and filmmaker building the visual world around NURYS releases.',
     image: '/img/artists/vali.jpg',
+    social: { instagram: '@valinnoff' },
+  },
+  {
+    slug: 'mixedbyfade',
+    name: 'MIXEDBYFADE',
+    roles: ['Sound Engineer'],
+    category: 'engineer',
+    bio: 'Sound engineer shaping the final mix and low end across the NURYS catalogue.',
+    image: '/img/artists/mixedbyfade.jpg',
+    social: { instagram: '@mixedbyfade' },
   },
 ];
 
@@ -86,4 +108,5 @@ export const categoryLabels: Record<ArtistCategory, string> = {
   artist: 'Artists',
   producer: 'Producers',
   creative: 'Creatives',
+  engineer: 'Sound Engineers',
 };

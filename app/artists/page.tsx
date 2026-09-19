@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: 'The current NURYS collective — artists, producers and creatives.',
 };
 
-const order: ArtistCategory[] = ['artist', 'producer', 'creative'];
+const order: ArtistCategory[] = ['artist', 'producer', 'engineer', 'creative'];
 
 export default function ArtistsPage() {
   return (
@@ -48,6 +48,17 @@ export default function ArtistsPage() {
                       <p className="mt-4 max-w-sm text-sm leading-relaxed text-smoke">
                         {artist.bio}
                       </p>
+
+                      {artist.social?.instagram && (
+                        <a
+                          href={`https://instagram.com/${artist.social.instagram.replace('@', '')}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-3 inline-block text-xs text-bone/70 underline underline-offset-4 transition-colors hover:text-bone"
+                        >
+                          {artist.social.instagram}
+                        </a>
+                      )}
 
                       {artist.gallery && artist.gallery.length > 0 && (
                         <div className="mt-6 grid grid-cols-3 gap-2 max-w-sm">
