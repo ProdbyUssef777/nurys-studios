@@ -55,7 +55,7 @@ export const artists: Artist[] = [
     roles: ['Music Producer'],
     category: 'producer',
     bio: 'Producer bringing a new sonic direction to the NURYS roster.',
-    image: '/img/artists/shxtgunwav.svg',
+    image: '/img/artists/shxtgunwav.jpg',
     social: { instagram: '@shxtgun.wav' },
   },
   {
