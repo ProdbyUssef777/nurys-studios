@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { site } from '@/data/site';
 import { artists } from '@/data/artists';
 import { releases } from '@/data/releases';
@@ -17,13 +16,16 @@ export default function HomePage() {
     <>
       {/* ── HERO ─────────────────────────────────────────── */}
       <section className="grain relative flex min-h-[92vh] flex-col justify-end overflow-hidden border-b border-line px-6 pb-14 pt-40 md:px-10 md:pb-20">
-        <Image
-          src="/img/hero-bg.svg"
-          alt=""
-          fill
-          priority
-          className="pointer-events-none object-cover opacity-70"
-        />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/img/hero-bg.svg"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-70"
+        >
+          <source src="/video/hero-loop.mp4" type="video/mp4" />
+        </video>
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/10" />
 
         <div className="relative mx-auto w-full max-w-edge">

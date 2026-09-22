@@ -68,6 +68,15 @@ export const artists: Artist[] = [
     social: { instagram: '@anysthereal_' },
   },
   {
+    slug: 'sultanmoussa',
+    name: 'SULTAN MOUSSA (OVA)',
+    roles: ['Artist'],
+    category: 'artist',
+    bio: 'Sultan Moussa (OVA) is an Egyptian artist bringing a distinctive energy to the region’s evolving underground scene. His sound blends raw emotion, modern trap influences, and experimental textures, creating a style that feels personal, direct, and unapologetic.',
+    image: '/img/artists/sultanmoussa.jpg',
+    social: { instagram: '@sultanmoussax' },
+  },
+  {
     slug: '24snake',
     name: '24SNAKE',
     roles: ['Artist', 'Rapper'],
