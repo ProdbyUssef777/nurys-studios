@@ -55,7 +55,7 @@ export const artists: Artist[] = [
     roles: ['Music Producer'],
     category: 'producer',
     bio: 'Producer bringing a new sonic direction to the NURYS roster.',
-    image: '/img/artists/shxtgunwav.svg',
+    image: '/img/artists/shxtgunwav.jpg',
     social: { instagram: '@shxtgun.wav' },
   },
   {
@@ -65,6 +65,7 @@ export const artists: Artist[] = [
     category: 'creative',
     bio: 'Multidisciplinary creative shaping the visual language of NURYS across design, photography and film.',
     image: '/img/artists/anys.jpg',
+    social: { instagram: '@anysthereal_' },
   },
   {
     slug: '24snake',
@@ -83,6 +84,15 @@ export const artists: Artist[] = [
       '/img/artists/24snake-gallery/24snake-07.jpg',
     ],
     social: { instagram: '@24.snake' },
+  },
+  {
+    slug: 'sultanmoussa',
+    name: 'SULTAN MOUSSA ( OVA )',
+    roles: ['Artist', 'Rapper'],
+    category: 'artist',
+    bio: 'Sultan Moussa is an Egyptian artist bringing a distinctive energy to the region’s evolving underground scene. His sound blends raw emotion, modern trap influences, and experimental textures, creating a style that feels personal, direct, and unapologetic.',
+    image: '/img/artists/sultanmoussa.jpg',
+    social: { instagram: '@sultanmoussax' },
   },
   {
     slug: 'vali',
