@@ -70,3 +70,28 @@ body {
 .text-balance {
   text-wrap: balance;
 }
+
+/* Auto-scrolling roster marquee: two copies of the track slide
+   left continuously; hovering pauses it so people can read. */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee-scroll 36s linear infinite;
+}
+
+.marquee-wrapper:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}

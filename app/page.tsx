@@ -5,12 +5,11 @@ import { artists } from '@/data/artists';
 import { releases } from '@/data/releases';
 import { visuals } from '@/data/visuals';
 import Reveal from '@/components/Reveal';
-import ArtistCard from '@/components/ArtistCard';
+import RosterMarquee from '@/components/RosterMarquee';
 import ReleaseRow from '@/components/ReleaseRow';
 import VisualCard from '@/components/VisualCard';
 
 export default function HomePage() {
-  const featuredArtists = artists.slice(0, 4);
   const latestReleases = releases.slice(0, 3);
   const featuredVisuals = visuals.slice(0, 4);
 
@@ -88,10 +87,8 @@ export default function HomePage() {
             </div>
           </Reveal>
 
-          <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-            {featuredArtists.map((artist) => (
-              <ArtistCard key={artist.slug} artist={artist} />
-            ))}
+          <div className="mt-12">
+            <RosterMarquee artists={artists} />
           </div>
         </div>
       </section>
