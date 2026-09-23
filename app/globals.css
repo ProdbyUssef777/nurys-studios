@@ -58,19 +58,19 @@ button,
 }
 
 body {
-  background-color: #0a0a0a;
-  color: #f2f1ec;
+  background-color: rgb(var(--color-ink));
+  color: rgb(var(--color-bone));
   font-feature-settings: 'ss01' on, 'kern' on;
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: #f2f1ec;
-  color: #0a0a0a;
+  background: rgb(var(--color-bone));
+  color: rgb(var(--color-ink));
 }
 
 :focus-visible {
-  outline: 1px solid #f2f1ec;
+  outline: 1px solid rgb(var(--color-bone));
   outline-offset: 3px;
 }
 
@@ -90,7 +90,7 @@ body {
 
 /* Fine hairline rules used throughout, instead of card borders */
 .hairline {
-  border-color: #232320;
+  border-color: rgb(var(--color-line));
 }
 
 /* Subtle static grain overlay for cinematic texture, very low opacity */

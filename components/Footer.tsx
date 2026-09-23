@@ -16,7 +16,18 @@ export default function Footer() {
         <div className="grid gap-12 md:grid-cols-2">
           <div>
             <div className="relative h-10 w-10">
-              <Image src={site.logo.white} alt={site.name} fill className="object-contain" />
+              <Image
+                src={site.logo.white}
+                alt={site.name}
+                fill
+                className="logo-dark object-contain"
+              />
+              <Image
+                src={site.logo.black}
+                alt={site.name}
+                fill
+                className="logo-light object-contain"
+              />
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-smoke">
               {site.tagline.join(' ')}
