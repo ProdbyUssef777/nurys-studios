@@ -4,6 +4,7 @@ import Nav from '@/components/Nav';
 import AnnouncementBar from '@/components/AnnouncementBar';
 import Footer from '@/components/Footer';
 import { site } from '@/data/site';
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -28,8 +29,6 @@ export const metadata: Metadata = {
   },
 };
 
-// Runs before hydration so the saved theme applies before first paint —
-// otherwise the page would flash dark then switch to light on load.
 const themeInitScript = `(function(){try{var t=localStorage.getItem('nurys-theme');if(t==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -43,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );

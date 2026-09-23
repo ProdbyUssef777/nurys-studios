@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import type { Release } from '@/data/releases';
 import StreamingLinks from './StreamingLinks';
 
@@ -27,7 +28,9 @@ export default function ReleaseRow({ release }: { release: Release }) {
           {typeLabels[release.type]} · {release.year}
         </p>
         <h3 className="mt-1 truncate font-display text-2xl font-semibold tracking-tightest md:text-3xl">
-          {release.title}
+          <Link href={`/music/${release.slug}`} className="hover:opacity-70 transition-opacity">
+            {release.title}
+          </Link>
         </h3>
         <p className="mt-1 text-sm text-bone/70">{release.artist}</p>
         <p className="mt-1 text-xs text-smoke">{release.credits}</p>

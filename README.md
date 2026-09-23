@@ -134,3 +134,20 @@ scripts/             Placeholder-image generator (not needed at runtime)
   appear anywhere.
 - Streaming links only render once a real URL is added to
   `data/releases.ts` or `data/site.ts`.
+
+
+## New site features
+
+- Artist + release-type filtering on `/music`
+- Dedicated release pages at `/music/[slug]`
+- Spotify embedded previews when a Spotify link exists
+- Dynamic release Open Graph image route
+- Contact form feedback states
+- Footer newsletter UI + `/api/newsletter` webhook endpoint
+- Vercel Analytics integration
+
+### One-time setup
+
+1. Run `npm install` after pulling the updated project.
+2. In Vercel, add `NEWSLETTER_WEBHOOK_URL` in Project Settings → Environment Variables.
+3. Deploy. Shared release URLs now use release artwork in social previews.

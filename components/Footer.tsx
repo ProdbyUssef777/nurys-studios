@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { site } from '@/data/site';
+import NewsletterForm from './NewsletterForm';
 
 const socials = [
   { label: 'Instagram', href: site.instagram.url },
@@ -33,6 +34,7 @@ export default function Footer() {
               {site.tagline.join(' ')}
             </p>
             <p className="mt-6 text-sm text-bone/80">{site.direction}</p>
+            <NewsletterForm />
           </div>
 
           <div className="flex flex-col items-start gap-3 md:items-end">
