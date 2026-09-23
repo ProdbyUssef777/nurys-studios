@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Nav from '@/components/Nav';
+import AnnouncementBar from '@/components/AnnouncementBar';
 import Footer from '@/components/Footer';
 import { site } from '@/data/site';
 
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="flex min-h-screen flex-col font-body">
+        <AnnouncementBar />
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />

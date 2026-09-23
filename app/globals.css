@@ -127,6 +127,31 @@ body {
   animation-play-state: paused;
 }
 
+/* Top announcement strip — a bit faster than the roster marquee since
+   the message is short and it should feel urgent, not lazy. */
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  animation: ticker-scroll 18s linear infinite;
+}
+
+.group:hover .animate-ticker {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee {
     animation: none;

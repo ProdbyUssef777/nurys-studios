@@ -31,15 +31,6 @@ export const journalEntries: JournalEntry[] = [
     date: '2026-09-01',
     image: '/img/journal/low-key-announcement.jpg',
   },
-  {
-    slug: 'nurys-studios-launch',
-    title: 'NURYS STUDIOS begins.',
-    excerpt:
-      'An independent record label and creative collective opens its doors in Morocco, with an active foundation already producing music and visual work.',
-    category: 'announcement',
-    date: '2026-01-14',
-    image: '/img/journal/journal-01.svg',
-  },
 ];
 
 export const journalCategoryLabels: Record<JournalCategory, string> = {
