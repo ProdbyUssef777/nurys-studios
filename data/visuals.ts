@@ -90,6 +90,38 @@ export const visuals: Visual[] = [
     aspect: 0.5625,
     image: '/img/visuals/anys-visual-star-shadow-vintage.jpg',
   },
+  {
+    slug: 'lowkey-poster-silhouette',
+    title: 'LOW-KEY — Silhouette',
+    credit: 'Design — ANYS',
+    category: 'design',
+    aspect: 1,
+    image: '/img/visuals/lowkey-poster-silhouette.jpg',
+  },
+  {
+    slug: 'lowkey-poster-lx-mark',
+    title: 'LOW-KEY — LX Mark',
+    credit: 'Design — ANYS',
+    category: 'design',
+    aspect: 1,
+    image: '/img/visuals/lowkey-poster-lx-mark.jpg',
+  },
+  {
+    slug: 'lowkey-poster-reaching-light',
+    title: 'LOW-KEY — Reaching Light',
+    credit: 'Design — ANYS',
+    category: 'design',
+    aspect: 1,
+    image: '/img/visuals/lowkey-poster-reaching-light.jpg',
+  },
+  {
+    slug: 'lowkey-poster-same-city',
+    title: 'LOW-KEY — Same City',
+    credit: 'Design — ANYS',
+    category: 'design',
+    aspect: 1,
+    image: '/img/visuals/lowkey-poster-same-city.jpg',
+  },
 ];
 
 export const visualCategoryLabels: Record<VisualCategory, string> = {
