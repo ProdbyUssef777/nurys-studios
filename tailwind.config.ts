@@ -9,12 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: '#0a0a0a',        // primary background, near-black
-        void: '#050505',       // deeper background for contrast sections
-        bone: '#f2f1ec',       // off-white foreground
-        smoke: '#9a988f',      // muted secondary text
-        line: '#232320',       // hairline borders
-        rust: '#a8531f',       // single restrained accent, used sparingly
+        // Each token reads from a CSS variable (set in globals.css) so the
+        // whole site can invert for light mode without touching a single
+        // component — only the variable values change.
+        ink: 'rgb(var(--color-ink) / <alpha-value>)', // primary background
+        void: 'rgb(var(--color-void) / <alpha-value>)', // deeper background for contrast sections
+        bone: 'rgb(var(--color-bone) / <alpha-value>)', // foreground
+        smoke: 'rgb(var(--color-smoke) / <alpha-value>)', // muted secondary text
+        line: 'rgb(var(--color-line) / <alpha-value>)', // hairline borders
+        rust: 'rgb(var(--color-rust) / <alpha-value>)', // single restrained accent, used sparingly
       },
       fontFamily: {
         display: [

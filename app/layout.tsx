@@ -27,9 +27,16 @@ export const metadata: Metadata = {
   },
 };
 
+// Runs before hydration so the saved theme applies before first paint —
+// otherwise the page would flash dark then switch to light on load.
+const themeInitScript = `(function(){try{var t=localStorage.getItem('nurys-theme');if(t==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}})();`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="flex min-h-screen flex-col font-body">
         <Nav />
         <main className="flex-1">{children}</main>
