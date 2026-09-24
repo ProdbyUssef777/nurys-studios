@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
-import { releases } from '@/data/releases';
+import { visibleReleases } from '@/data/releases';
 import MusicLibrary from '@/components/MusicLibrary';
 import Reveal from '@/components/Reveal';
+
+// Re-check every 5 minutes so scheduled releases (see `publishAt` in
+// data/releases.ts) go live on their own, without a redeploy.
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: 'Music',
@@ -11,6 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default function MusicPage() {
+  const releases = visibleReleases();
+
   return (
     <div className="px-6 py-32 md:px-10 md:py-40">
       <div className="mx-auto max-w-edge">

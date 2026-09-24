@@ -33,6 +33,10 @@ export const metadata: Metadata = {
 // otherwise the page would flash dark then switch to light on load.
 const themeInitScript = `(function(){try{var t=localStorage.getItem('nurys-theme');if(t==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}})();`;
 
+// Re-check every 5 minutes so the announcement bar (which reads the
+// LOW-KEY release's publishAt) flips over automatically at go-live time.
+export const revalidate = 300;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
