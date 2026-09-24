@@ -6,6 +6,8 @@ import Reveal from '@/components/Reveal';
 export const metadata: Metadata = {
   title: 'Journal',
   description: 'News, releases and behind-the-scenes from NURYS STUDIOS.',
+  openGraph: { images: ['/img/journal/low-key-announcement.jpg'] },
+  twitter: { images: ['/img/journal/low-key-announcement.jpg'] },
 };
 
 export default function JournalPage() {

@@ -34,24 +34,29 @@ export default function Footer() {
               {site.tagline.join(' ')}
             </p>
             <p className="mt-6 text-sm text-bone/80">{site.direction}</p>
-            <NewsletterForm />
           </div>
 
-          <div className="flex flex-col items-start gap-3 md:items-end">
-            <Link href="/journal" className="text-sm text-bone/80 transition-colors hover:text-bone">
-              Journal
-            </Link>
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
+          <div className="flex flex-col items-start gap-8 md:items-end">
+            <NewsletterForm />
+            <div className="flex flex-col items-start gap-3 md:items-end">
+              <Link
+                href="/journal"
                 className="text-sm text-bone/80 transition-colors hover:text-bone"
               >
-                {s.label}
-              </a>
-            ))}
+                Journal
+              </Link>
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-bone/80 transition-colors hover:text-bone"
+                >
+                  {s.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 

@@ -6,6 +6,8 @@ import Reveal from '@/components/Reveal';
 export const metadata: Metadata = {
   title: 'Artists',
   description: 'The current NURYS collective — artists, producers and creatives.',
+  openGraph: { images: ['/img/artists/ussef777.jpg'] },
+  twitter: { images: ['/img/artists/ussef777.jpg'] },
 };
 
 const order: ArtistCategory[] = ['artist', 'producer', 'engineer', 'creative'];

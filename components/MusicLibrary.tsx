@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import type { Release, ReleaseType } from '@/data/releases';
 import ReleaseRow from './ReleaseRow';
 
@@ -14,22 +14,19 @@ const filters: { label: string; value: ReleaseType | 'all' }[] = [
 
 export default function MusicLibrary({ releases }: { releases: Release[] }) {
   const [active, setActive] = useState<ReleaseType | 'all'>('all');
-  const [artist, setArtist] = useState('all');
+  const [query, setQuery] = useState('');
 
-  const artists = useMemo(
-    () => Array.from(new Set(releases.map((release) => release.artist))).sort(),
-    [releases]
-  );
-
-  const visible = releases.filter(
-    (release) =>
-      (active === 'all' || release.type === active) &&
-      (artist === 'all' || release.artist === artist)
-  );
+  const visible = releases
+    .filter((r) => active === 'all' || r.type === active)
+    .filter((r) => {
+      const q = query.trim().toLowerCase();
+      if (!q) return true;
+      return r.title.toLowerCase().includes(q) || r.artist.toLowerCase().includes(q);
+    });
 
   return (
     <div>
-      <div className="flex flex-col gap-6 border-b border-line pb-6 md:flex-row md:items-end md:justify-between">
+      <div className="flex flex-col gap-5 border-b border-line pb-6 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-wrap gap-x-6 gap-y-3">
           {filters.map((f) => (
             <button
@@ -45,24 +42,32 @@ export default function MusicLibrary({ releases }: { releases: Release[] }) {
           ))}
         </div>
 
-        <label className="flex items-center gap-3 text-xs tracking-wide2 text-smoke">
-          ARTIST
-          <select
-            value={artist}
-            onChange={(e) => setArtist(e.target.value)}
-            className="border border-line bg-ink px-3 py-2 text-xs text-bone outline-none"
-            aria-label="Filter releases by artist"
-          >
-            <option value="all">All artists</option>
-            {artists.map((name) => (
-              <option key={name} value={name}>{name}</option>
-            ))}
-          </select>
-        </label>
+        <div className="relative w-full md:w-64">
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search title or artist…"
+            aria-label="Search releases"
+            className="w-full border-b border-line bg-transparent py-1.5 text-sm text-bone placeholder:text-smoke focus:border-bone focus:outline-none"
+          />
+          {query && (
+            <button
+              type="button"
+              onClick={() => setQuery('')}
+              aria-label="Clear search"
+              className="absolute right-0 top-1/2 -translate-y-1/2 text-smoke hover:text-bone"
+            >
+              ✕
+            </button>
+          )}
+        </div>
       </div>
 
       {visible.length === 0 ? (
-        <p className="py-16 text-sm text-smoke">Nothing in this category yet — check back soon.</p>
+        <p className="py-16 text-sm text-smoke">
+          {query ? `Nothing matches "${query}".` : 'Nothing in this category yet — check back soon.'}
+        </p>
       ) : (
         <div>
           {visible.map((release) => (

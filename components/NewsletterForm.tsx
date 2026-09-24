@@ -1,61 +1,49 @@
 'use client';
 
 import { useState } from 'react';
+import { site } from '@/data/site';
 
 export default function NewsletterForm() {
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'sent'>('idle');
 
-  async function submit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setStatus('loading');
-
-    try {
-      const res = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-      if (!res.ok) throw new Error('Subscription failed');
-      setEmail('');
-      setStatus('success');
-    } catch {
-      setStatus('error');
-    }
+    const subject = encodeURIComponent('Newsletter signup');
+    const body = encodeURIComponent(`Please add me to the mailing list: ${email}`);
+    window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
+    setStatus('sent');
   }
 
   return (
-    <div className="mt-12 border-t border-line pt-8">
-      <p className="text-xs tracking-wide2 text-smoke">STAY IN THE LOOP</p>
-      <p className="mt-2 max-w-sm text-sm text-bone/70">
-        Get notified when NURYS drops something new.
-      </p>
-      <form onSubmit={submit} className="mt-5 flex max-w-md gap-3">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+      <p className="text-xs tracking-wide2 text-smoke">STAY UPDATED</p>
+      <div className="flex items-stretch gap-2">
         <input
           required
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email address"
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (status === 'sent') setStatus('idle');
+          }}
+          placeholder="Your email"
           aria-label="Email address"
-          className="min-w-0 flex-1 border-b border-line bg-transparent py-3 text-sm text-bone placeholder:text-smoke focus:border-bone focus:outline-none"
+          className="w-full max-w-[220px] border-b border-line bg-transparent py-2 text-sm text-bone placeholder:text-smoke focus:border-bone focus:outline-none transition-colors duration-300"
         />
         <button
           type="submit"
-          disabled={status === 'loading'}
-          className="border border-bone px-5 py-3 text-xs tracking-wide2 text-bone transition-colors hover:bg-bone hover:text-ink disabled:opacity-50"
+          className="shrink-0 border border-bone px-4 py-2 text-xs tracking-wide2 text-bone transition-colors duration-300 ease-editorial hover:bg-bone hover:text-ink"
         >
-          {status === 'loading' ? '…' : 'JOIN'}
+          JOIN
         </button>
-      </form>
-      {status === 'success' && (
-        <p className="mt-3 text-xs text-smoke" role="status">You’re on the list.</p>
-      )}
-      {status === 'error' && (
-        <p className="mt-3 text-xs text-red-400" role="alert">
-          Subscription is not configured yet. Please try again later.
+      </div>
+      {status === 'sent' && (
+        <p className="max-w-xs text-xs text-smoke">
+          Your email app should now open to confirm. If nothing happened, write to us directly at{' '}
+          {site.email}.
         </p>
       )}
-    </div>
+    </form>
   );
 }

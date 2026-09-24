@@ -6,6 +6,8 @@ import Reveal from '@/components/Reveal';
 export const metadata: Metadata = {
   title: 'Visuals',
   description: 'Music videos, photography, film, art direction and design from NURYS.',
+  openGraph: { images: ['/img/visuals/anys-visual-02.jpg'] },
+  twitter: { images: ['/img/visuals/anys-visual-02.jpg'] },
 };
 
 export default function VisualsPage() {

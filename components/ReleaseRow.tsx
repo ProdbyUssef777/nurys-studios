@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import type { Release } from '@/data/releases';
 import StreamingLinks from './StreamingLinks';
+import SpotifyPreview from './SpotifyPreview';
 
 const typeLabels: Record<Release['type'], string> = {
   single: 'Single',
@@ -28,12 +28,11 @@ export default function ReleaseRow({ release }: { release: Release }) {
           {typeLabels[release.type]} · {release.year}
         </p>
         <h3 className="mt-1 truncate font-display text-2xl font-semibold tracking-tightest md:text-3xl">
-          <Link href={`/music/${release.slug}`} className="hover:opacity-70 transition-opacity">
-            {release.title}
-          </Link>
+          {release.title}
         </h3>
         <p className="mt-1 text-sm text-bone/70">{release.artist}</p>
         <p className="mt-1 text-xs text-smoke">{release.credits}</p>
+        {release.links.spotify && <SpotifyPreview spotifyUrl={release.links.spotify} />}
         <div className="mt-3 md:hidden">
           <StreamingLinks links={release.links} />
         </div>

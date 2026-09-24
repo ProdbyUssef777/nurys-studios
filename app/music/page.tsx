@@ -6,6 +6,8 @@ import Reveal from '@/components/Reveal';
 export const metadata: Metadata = {
   title: 'Music',
   description: 'Releases and productions from the NURYS collective.',
+  openGraph: { images: ['/img/releases/2gb.jpg'] },
+  twitter: { images: ['/img/releases/2gb.jpg'] },
 };
 
 export default function MusicPage() {
