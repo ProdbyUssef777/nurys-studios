@@ -13,6 +13,10 @@
 // appears automatically — no redeploy needed. Use this to line
 // up a drop with its streaming release time. Leave it unset for
 // releases that are already out.
+//
+// `draft` (optional): set true to hide a release everywhere on
+// the site — useful for placeholders that don't have real
+// artwork/credits/links yet. Flip to false (or remove) once ready.
 // ────────────────────────────────────────────────────────────
 
 export type ReleaseType = 'single' | 'ep' | 'album' | 'production';
@@ -26,6 +30,7 @@ export interface Release {
   credits: string;
   cover: string;
   publishAt?: string;
+  draft?: boolean;
   links: {
     spotify?: string;
     appleMusic?: string;
@@ -73,6 +78,7 @@ export const releases: Release[] = [
     type: 'single',
     credits: 'Produced by 2MON666',
     cover: '/img/releases/release-02.svg',
+    draft: true,
     links: {},
   },
   {
@@ -83,12 +89,15 @@ export const releases: Release[] = [
     type: 'production',
     credits: 'Instrumental / Beat tape',
     cover: '/img/releases/release-03.svg',
+    draft: true,
     links: {},
   },
 ];
 
-// A release is live once its publishAt time has passed (or it has none).
+// A release is live once its publishAt time has passed (or it has none),
+// and it isn't marked as a draft.
 export function isReleased(release: Release): boolean {
+  if (release.draft) return false;
   return !release.publishAt || new Date(release.publishAt).getTime() <= Date.now();
 }
 
