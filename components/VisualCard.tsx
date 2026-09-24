@@ -1,18 +1,26 @@
-import BlurImage from './BlurImage';
+import Image from 'next/image';
 import type { Visual } from '@/data/visuals';
 
-export default function VisualCard({ visual }: { visual: Visual }) {
-  const Wrapper = visual.url ? 'a' : 'div';
+export default function VisualCard({
+  visual,
+  onClick,
+}: {
+  visual: Visual;
+  onClick?: () => void;
+}) {
+  const Wrapper = visual.url ? 'a' : onClick ? 'button' : 'div';
   const wrapperProps = visual.url
     ? { href: visual.url, target: '_blank', rel: 'noopener noreferrer' }
-    : {};
+    : onClick
+      ? { onClick, type: 'button' as const }
+      : {};
 
   return (
     <div className="group relative">
-      <Wrapper {...wrapperProps} className="block">
+      <Wrapper {...(wrapperProps as any)} className="block w-full text-left">
         <figure className="relative origin-center overflow-hidden bg-void shadow-none transition-all duration-500 ease-editorial group-hover:z-20 group-hover:scale-125 group-hover:shadow-2xl group-hover:shadow-black/60">
           <div className="relative w-full" style={{ aspectRatio: visual.aspect }}>
-            <BlurImage
+            <Image
               src={visual.image}
               alt={visual.title}
               fill
@@ -24,6 +32,15 @@ export default function VisualCard({ visual }: { visual: Visual }) {
                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-bone/90">
                   <svg viewBox="0 0 24 24" fill="currentColor" className="ml-1 h-6 w-6 text-ink">
                     <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            )}
+            {!visual.url && onClick && (
+              <div className="absolute inset-0 flex items-center justify-center bg-ink/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-bone/90">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5 text-ink">
+                    <path d="M4 9V5a1 1 0 011-1h4M20 9V5a1 1 0 00-1-1h-4M4 15v4a1 1 0 001 1h4M20 15v4a1 1 0 01-1 1h-4" />
                   </svg>
                 </div>
               </div>
