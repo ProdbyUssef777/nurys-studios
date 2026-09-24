@@ -39,7 +39,10 @@ export const site = {
   youtube: '',
 
   // ── Site metadata / SEO ──────────────────────────────────
-  url: 'https://nurys.studio',
+  // TODO: point this at your custom domain once it's connected;
+  // using the live Vercel URL for now so OG images / JSON-LD /
+  // sitemap all resolve to real, working links.
+  url: 'https://nurys-studios.vercel.app',
   seoTitle: 'NURYS STUDIOS — Independent Record Label & Creative Collective',
 } as const;
 

@@ -37,11 +37,25 @@ const themeInitScript = `(function(){try{var t=localStorage.getItem('nurys-theme
 // LOW-KEY release's publishAt) flips over automatically at go-live time.
 export const revalidate = 300;
 
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  url: site.url,
+  logo: `${site.url}${site.logo.white}`,
+  description: site.description,
+  sameAs: [site.instagram.url],
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
       </head>
       <body className="flex min-h-screen flex-col font-body">
         <AnnouncementBar />

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import { journalEntries, journalCategoryLabels } from '@/data/journal';
 import Reveal from '@/components/Reveal';
 
@@ -21,15 +22,17 @@ export default function JournalPage() {
         <div className="mt-16 grid gap-16 md:grid-cols-2">
           {journalEntries.map((entry) => (
             <article key={entry.slug} className="group">
-              <div className="relative aspect-[2/3] overflow-hidden bg-void">
-                <Image
-                  src={entry.image}
-                  alt={entry.title}
-                  fill
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  className="object-contain transition-transform duration-700 ease-editorial group-hover:scale-105"
-                />
-              </div>
+              <Link href={`/journal/${entry.slug}`}>
+                <div className="relative aspect-[2/3] overflow-hidden bg-void">
+                  <Image
+                    src={entry.image}
+                    alt={entry.title}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-contain transition-transform duration-700 ease-editorial group-hover:scale-105"
+                  />
+                </div>
+              </Link>
               <p className="mt-5 text-xs tracking-wide2 text-smoke">
                 {journalCategoryLabels[entry.category]} ·{' '}
                 {new Date(entry.date).toLocaleDateString('en-US', {
@@ -37,9 +40,11 @@ export default function JournalPage() {
                   year: 'numeric',
                 })}
               </p>
-              <h2 className="mt-2 font-display text-2xl font-semibold tracking-tightest">
-                {entry.title}
-              </h2>
+              <Link href={`/journal/${entry.slug}`}>
+                <h2 className="mt-2 font-display text-2xl font-semibold tracking-tightest transition-colors hover:text-bone/70">
+                  {entry.title}
+                </h2>
+              </Link>
               <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-bone/70">
                 {entry.excerpt}
               </p>

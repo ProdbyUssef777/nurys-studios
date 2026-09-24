@@ -60,9 +60,20 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-2 border-t border-line pt-8 text-xs text-smoke md:flex-row md:items-center md:justify-between">
+        <div className="mt-16 flex flex-col gap-4 border-t border-line pt-8 text-xs text-smoke md:flex-row md:items-center md:justify-between">
           <p>{site.copyright}</p>
-          <p>{site.legalLine}</p>
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
+            <Link href="/press" className="transition-colors hover:text-bone">
+              Press
+            </Link>
+            <Link href="/privacy" className="transition-colors hover:text-bone">
+              Privacy
+            </Link>
+            <a href="/journal/rss.xml" className="transition-colors hover:text-bone">
+              RSS
+            </a>
+            <p>{site.legalLine}</p>
+          </div>
         </div>
       </div>
     </footer>

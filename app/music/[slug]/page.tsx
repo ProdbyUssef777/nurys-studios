@@ -2,98 +2,116 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { releases } from '@/data/releases';
+import { releases, isReleased } from '@/data/releases';
+import { site } from '@/data/site';
 import StreamingLinks from '@/components/StreamingLinks';
+import SpotifyPreview from '@/components/SpotifyPreview';
+import Reveal from '@/components/Reveal';
 
-function getSpotifyEmbed(url?: string) {
-  if (!url) return null;
-  const match = url.match(/open\.spotify\.com\/(track|album|playlist)\/([^?]+)/);
-  if (!match) return null;
-  return `https://open.spotify.com/embed/${match[1]}/${match[2]}?utm_source=generator`;
-}
+export const revalidate = 300;
 
 export function generateStaticParams() {
-  return releases.map((release) => ({ slug: release.slug }));
+  return releases.filter((r) => !r.draft).map((r) => ({ slug: r.slug }));
 }
 
-export function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Metadata {
-  const release = releases.find((item) => item.slug === params.slug);
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const release = releases.find((r) => r.slug === params.slug && !r.draft);
   if (!release) return {};
   return {
     title: release.title,
-    description: `${release.title} — ${release.artist}. ${release.credits}`,
-    openGraph: {
-      title: `${release.title} — ${release.artist}`,
-      description: release.credits,
-      type: 'music.song',
-      images: [release.cover],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${release.title} — ${release.artist}`,
-      description: release.credits,
-      images: [release.cover],
-    },
+    description: `${release.title} by ${release.artist} — ${release.credits}`,
+    openGraph: { images: [release.cover] },
+    twitter: { images: [release.cover] },
   };
 }
 
 export default function ReleasePage({ params }: { params: { slug: string } }) {
-  const release = releases.find((item) => item.slug === params.slug);
+  const release = releases.find((r) => r.slug === params.slug && !r.draft);
   if (!release) notFound();
 
-  const spotifyEmbed = getSpotifyEmbed(release.links.spotify);
+  const live = isReleased(release);
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'MusicRecording',
+    name: release.title,
+    byArtist: { '@type': 'MusicGroup', name: release.artist },
+    datePublished: release.publishAt ?? `${release.year}`,
+    url: `${site.url}/music/${release.slug}`,
+    image: `${site.url}${release.cover}`,
+    ...(release.links.spotify && {
+      sameAs: [release.links.spotify, release.links.appleMusic, release.links.deezer].filter(
+        Boolean
+      ),
+    }),
+  };
 
   return (
-    <div className="px-6 py-24 md:px-10 md:py-32">
+    <div className="px-6 py-32 md:px-10 md:py-40">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="mx-auto max-w-edge">
-        <Link href="/music" className="text-xs tracking-wide2 text-smoke hover:text-bone">
-          ← BACK TO MUSIC
-        </Link>
+        <Reveal>
+          <Link href="/music" className="text-xs text-smoke underline underline-offset-4 hover:text-bone">
+            ← Music
+          </Link>
+        </Reveal>
 
-        <div className="mt-10 grid gap-12 md:grid-cols-[minmax(280px,420px)_1fr] md:items-start">
-          <div className="relative aspect-square overflow-hidden bg-void">
-            <Image
-              src={release.cover}
-              alt={`${release.title} artwork`}
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 420px"
-              className="object-cover"
-            />
-          </div>
-
-          <div>
-            <p className="text-xs tracking-wide2 text-smoke">
-              {release.type.toUpperCase()} · {release.year}
-            </p>
-            <h1 className="mt-3 font-display text-display-lg font-bold tracking-tightest">
-              {release.title}
-            </h1>
-            <p className="mt-3 text-base text-bone/70">{release.artist}</p>
-            <p className="mt-3 text-sm text-smoke">{release.credits}</p>
-
-            {spotifyEmbed && (
-              <div className="mt-10 overflow-hidden border border-line">
-                <iframe
-                  src={spotifyEmbed}
-                  title={`${release.title} on Spotify`}
-                  width="100%"
-                  height="152"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  className="block"
-                />
-              </div>
-            )}
-
-            <div className="mt-8">
-              <StreamingLinks links={release.links} />
+        <div className="mt-8 grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,380px)_1fr] md:gap-16">
+          <Reveal>
+            <div className="relative aspect-square overflow-hidden bg-void">
+              <Image
+                src={release.cover}
+                alt={release.title}
+                fill
+                sizes="(min-width: 768px) 380px, 100vw"
+                className="object-cover"
+                priority
+              />
             </div>
-          </div>
+          </Reveal>
+
+          <Reveal>
+            <div>
+              {!live && (
+                <p className="text-xs tracking-wide2 text-rust">
+                  OUT {new Date(release.publishAt!).toLocaleDateString('en-GB', {
+                    weekday: 'long',
+                    day: '2-digit',
+                    month: '2-digit',
+                  })}
+                </p>
+              )}
+              <h1 className="mt-2 font-display text-display-md font-bold tracking-tightest">
+                {release.title}
+              </h1>
+              <p className="mt-2 text-base text-bone/70">{release.artist}</p>
+              <p className="mt-6 max-w-md text-sm leading-relaxed text-smoke">{release.credits}</p>
+
+              <div className="mt-10">
+                {live ? (
+                  <>
+                    <StreamingLinks links={release.links} />
+                    {release.links.spotify && (
+                      <div className="mt-6">
+                        <SpotifyPreview spotifyUrl={release.links.spotify} />
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <p className="text-sm text-smoke">
+                    Not out yet —{' '}
+                    <Link href="/journal" className="underline underline-offset-4 hover:text-bone">
+                      read the announcement
+                    </Link>
+                    .
+                  </p>
+                )}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </div>

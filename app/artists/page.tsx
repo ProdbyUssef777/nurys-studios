@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import { artists, categoryLabels, type ArtistCategory } from '@/data/artists';
 import Reveal from '@/components/Reveal';
 
@@ -43,9 +44,11 @@ export default function ArtistsPage() {
                       />
                     </div>
                     <div>
-                      <h3 className="font-display text-2xl font-semibold tracking-tightest md:text-3xl">
-                        {artist.name}
-                      </h3>
+                      <Link href={`/artists/${artist.slug}`} className="group/name inline-block">
+                        <h3 className="font-display text-2xl font-semibold tracking-tightest transition-colors group-hover/name:text-bone/70 md:text-3xl">
+                          {artist.name}
+                        </h3>
+                      </Link>
                       <p className="mt-1 text-sm text-bone/70">{artist.roles.join(' / ')}</p>
                       <p className="mt-4 max-w-sm text-sm leading-relaxed text-smoke">
                         {artist.bio}
