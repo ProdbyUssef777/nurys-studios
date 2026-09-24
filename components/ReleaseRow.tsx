@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from '@/components/BlurImage';
 import Link from 'next/link';
 import type { Release } from '@/data/releases';
 import StreamingLinks from './StreamingLinks';

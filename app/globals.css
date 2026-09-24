@@ -201,3 +201,140 @@ body {
   opacity: 1;
   transform: rotate(0deg) scale(1);
 }
+
+/* ══ Motion & polish layer ═════════════════════════════════ */
+
+/* ── Custom scrollbar ─────────────────────────────────────── */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--color-smoke) / 0.55) rgb(var(--color-ink));
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(var(--color-ink));
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--color-smoke) / 0.45);
+  border-radius: 999px;
+  border: 2px solid rgb(var(--color-ink));
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--color-rust));
+}
+
+/* ── Page transition (see app/template.tsx) ───────────────── */
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.page-fade {
+  animation: page-fade-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Custom cursor ────────────────────────────────────────── */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #fff;
+  mix-blend-mode: difference; /* stays visible on dark, light and images */
+  pointer-events: none;
+  opacity: 0;
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+  will-change: transform;
+}
+.cursor-dot.is-visible {
+  opacity: 1;
+}
+.cursor-dot.is-hover {
+  width: 44px;
+  height: 44px;
+}
+.cursor-dot.is-down {
+  width: 6px;
+  height: 6px;
+}
+.cursor-dot.is-hover.is-down {
+  width: 34px;
+  height: 34px;
+}
+.cursor-dot.is-native {
+  opacity: 0;
+}
+/* Hide the system cursor only once the custom one is running. */
+html.has-custom-cursor,
+html.has-custom-cursor a,
+html.has-custom-cursor button,
+html.has-custom-cursor [role='button'],
+html.has-custom-cursor summary,
+html.has-custom-cursor label {
+  cursor: none;
+}
+html.has-custom-cursor input,
+html.has-custom-cursor textarea,
+html.has-custom-cursor select {
+  cursor: text;
+}
+
+/* ── Magnetic buttons ─────────────────────────────────────── */
+.magnetic {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+/* ── Kinetic headline ─────────────────────────────────────── */
+.kinetic .k-line {
+  display: block;
+  overflow: hidden;
+  /* room so the mask doesn't clip tight line-heights */
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.kinetic .k-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+.kinetic .k-char {
+  display: inline-block;
+  transform: translateY(115%);
+  transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.kinetic.is-in .k-char {
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .kinetic .k-char {
+    transform: none;
+    transition-delay: 0s !important;
+  }
+}
+
+/* ── Blur-up images (see components/BlurImage.tsx) ────────── */
+.img-pending {
+  opacity: 0;
+}
+@keyframes img-unblur {
+  from {
+    opacity: 0;
+    filter: blur(18px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+.img-unblur {
+  animation: img-unblur 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}

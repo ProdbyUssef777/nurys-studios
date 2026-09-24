@@ -4,6 +4,7 @@ import Nav from '@/components/Nav';
 import AnnouncementBar from '@/components/AnnouncementBar';
 import { Analytics } from '@vercel/analytics/react';
 import Footer from '@/components/Footer';
+import CustomCursor from '@/components/CustomCursor';
 import { site } from '@/data/site';
 
 export const metadata: Metadata = {
@@ -52,6 +53,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <noscript>
+          <style>{`.kinetic .k-char{transform:none!important}.img-pending{opacity:1!important}`}</style>
+        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
@@ -62,6 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
+        <CustomCursor />
         <Analytics />
       </body>
     </html>

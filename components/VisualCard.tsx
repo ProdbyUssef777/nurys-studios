@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from '@/components/BlurImage';
 import type { Visual } from '@/data/visuals';
 
 export default function VisualCard({

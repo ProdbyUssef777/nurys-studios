@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { nav, site } from '@/data/site';
 import MobileMenu from './MobileMenu';
 import ThemeToggle from './ThemeToggle';
+import Magnetic from './Magnetic';
 
 export default function Nav() {
   return (
@@ -40,12 +41,14 @@ export default function Nav() {
         <div className="flex items-center gap-3 md:gap-5">
           <ThemeToggle />
           <div className="hidden md:block">
+            <Magnetic strength={0.25}>
             <Link
               href="/music"
               className="border border-bone px-5 py-2 text-xs tracking-wide2 text-bone transition-colors duration-300 ease-editorial hover:bg-bone hover:text-ink"
             >
               LISTEN
             </Link>
+            </Magnetic>
           </div>
           <MobileMenu />
         </div>

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from '@/components/BlurImage';
 import type { Metadata } from 'next';
 import { site } from '@/data/site';
 import { artists } from '@/data/artists';
@@ -9,6 +9,9 @@ import Reveal from '@/components/Reveal';
 import RosterMarquee from '@/components/RosterMarquee';
 import ReleaseRow from '@/components/ReleaseRow';
 import VisualCard from '@/components/VisualCard';
+import KineticText from '@/components/KineticText';
+import Magnetic from '@/components/Magnetic';
+import CountUp from '@/components/CountUp';
 
 // Re-check every 5 minutes so a scheduled release (see `publishAt` in
 // data/releases.ts) appears here on its own, without a redeploy.
@@ -44,29 +47,31 @@ export default function HomePage() {
         <div className="relative mx-auto w-full max-w-edge">
           <p className="text-xs tracking-wide2 text-smoke">{site.legalLine}</p>
 
-          <h1 className="mt-6 font-display text-display-xl font-bold tracking-tightest">
-            {site.tagline.map((line) => (
-              <span key={line} className="block">
-                {line}
-              </span>
-            ))}
-          </h1>
+          <KineticText
+            as="h1"
+            lines={site.tagline}
+            className="mt-6 font-display text-display-xl font-bold tracking-tightest"
+          />
 
           <div className="mt-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <p className="text-sm text-bone/80 md:text-base">{site.direction}</p>
             <div className="flex flex-wrap gap-4">
-              <Link
+              <Magnetic>
+<Link
                 href="/about"
                 className="border border-bone px-6 py-3 text-xs tracking-wide2 transition-colors duration-300 ease-editorial hover:bg-bone hover:text-ink"
               >
                 EXPLORE NURYS
               </Link>
-              <Link
+</Magnetic>
+              <Magnetic>
+<Link
                 href="/music"
                 className="bg-bone px-6 py-3 text-xs tracking-wide2 text-ink transition-colors duration-300 ease-editorial hover:bg-transparent hover:text-bone hover:border hover:border-bone"
               >
                 LISTEN NOW
               </Link>
+</Magnetic>
             </div>
           </div>
         </div>
@@ -120,6 +125,24 @@ export default function HomePage() {
             </p>
           </div>
         </Reveal>
+      </section>
+
+      {/* ── NUMBERS ──────────────────────────────────────── */}
+      <section className="border-b border-line px-6 py-14 md:px-10 md:py-20">
+        <dl className="mx-auto grid max-w-edge grid-cols-3 gap-6">
+          {[
+            { label: 'Artists', value: artists.length },
+            { label: 'Releases', value: visibleReleases().length },
+            { label: 'Visuals', value: visuals.length },
+          ].map((stat) => (
+            <div key={stat.label} className="border-t border-line pt-4">
+              <dd className="font-display text-display-lg font-bold tracking-tightest">
+                <CountUp value={stat.value} />
+              </dd>
+              <dt className="mt-2 text-sm text-smoke">{stat.label}</dt>
+            </div>
+          ))}
+        </dl>
       </section>
 
       {/* ── CURRENT MOVEMENT ─────────────────────────────── */}
@@ -188,13 +211,11 @@ export default function HomePage() {
 
       {/* ── STATEMENT ────────────────────────────────────── */}
       <section className="border-b border-line px-6 py-28 md:px-10 md:py-44">
-        <Reveal>
-          <p className="mx-auto max-w-4xl text-center font-display text-display-lg font-bold leading-[0.95] tracking-tightest text-balance">
-            The label is new.
-            <br />
-            The creative work has already started.
-          </p>
-        </Reveal>
+        <KineticText
+          as="p"
+          lines={['The label is new.', 'The creative work has already started.']}
+          className="mx-auto max-w-4xl text-center font-display text-display-lg font-bold leading-[0.95] tracking-tightest text-balance"
+        />
       </section>
 
       {/* ── FINAL CTA ────────────────────────────────────── */}
@@ -204,18 +225,22 @@ export default function HomePage() {
             Build what&rsquo;s next.
           </h2>
           <div className="flex flex-wrap gap-4">
-            <Link
+            <Magnetic>
+<Link
               href="/contact"
               className="bg-bone px-6 py-3 text-xs tracking-wide2 text-ink transition-colors duration-300 ease-editorial hover:bg-transparent hover:text-bone hover:border hover:border-bone"
             >
               WORK WITH NURYS
             </Link>
-            <Link
+</Magnetic>
+            <Magnetic>
+<Link
               href="/contact"
               className="border border-bone px-6 py-3 text-xs tracking-wide2 transition-colors duration-300 ease-editorial hover:bg-bone hover:text-ink"
             >
               CONTACT
             </Link>
+</Magnetic>
           </div>
         </div>
       </section>

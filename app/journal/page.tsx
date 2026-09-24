@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import Image from '@/components/BlurImage';
 import Link from 'next/link';
 import { journalEntries, journalCategoryLabels } from '@/data/journal';
 import Reveal from '@/components/Reveal';
