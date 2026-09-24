@@ -48,11 +48,11 @@ export const releases: Release[] = [
     year: 2026,
     type: 'single',
     credits: 'Produced by 2mon666, Ussef777 · Directed & DP: Abdel Ali Kafil',
-    cover: '/img/journal/low-key-announcement.jpg',
+    cover: '/img/releases/low-key.jpg',
     publishAt: '2026-09-25T00:00:00+01:00',
     links: {
-      // Add the real links the moment they're live — they'll show up
-      // automatically next to the release, no other change needed.
+      spotify: 'https://open.spotify.com/album/1xoNxJ20VEd6XZYiWyfiQy',
+      // Apple Music, Deezer, iHeart — add once you send them, same pattern as spotify above.
     },
   },
   {
