@@ -14,14 +14,14 @@ export default function Nav() {
             src={site.logo.white}
             alt={site.name}
             fill
-            className="logo-dark object-contain"
+            className="theme-logo-dark object-contain"
             priority
           />
           <Image
             src={site.logo.black}
             alt={site.name}
             fill
-            className="logo-light object-contain"
+            className="theme-logo-light object-contain"
             priority
           />
         </Link>
@@ -38,18 +38,20 @@ export default function Nav() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3 md:gap-5">
+        <div className="flex items-center gap-3">
           <ThemeToggle />
+
           <div className="hidden md:block">
-            <Magnetic strength={0.25}>
-            <Link
-              href="/music"
-              className="border border-bone px-5 py-2 text-xs tracking-wide2 text-bone transition-colors duration-300 ease-editorial hover:bg-bone hover:text-ink"
-            >
-              LISTEN
-            </Link>
+            <Magnetic>
+              <Link
+                href="/music"
+                className="border border-bone px-5 py-2 text-xs tracking-wide2 text-bone transition-colors duration-300 ease-editorial hover:bg-bone hover:text-ink"
+              >
+                LISTEN
+              </Link>
             </Magnetic>
           </div>
+
           <MobileMenu />
         </div>
       </div>

@@ -2,41 +2,32 @@
 
 import { useRef } from 'react';
 
-// Wraps a button/link so it drifts slightly toward the mouse when it gets
-// close. Desktop only — touch devices never fire mouse pointer events.
-export default function Magnetic({
-  children,
-  strength = 0.3,
-  className = '',
-}: {
-  children: React.ReactNode;
-  strength?: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLSpanElement>(null);
+// Wraps a CTA (a Link/button) and nudges it slightly toward the
+// cursor on hover — a common "agency site" micro-interaction.
+export default function Magnetic({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
 
-  const onMove = (e: React.PointerEvent<HTMLSpanElement>) => {
-    if (e.pointerType !== 'mouse') return;
+  function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     const el = ref.current;
     if (!el) return;
-    const r = el.getBoundingClientRect();
-    const dx = e.clientX - (r.left + r.width / 2);
-    const dy = e.clientY - (r.top + r.height / 2);
-    el.style.transform = `translate3d(${dx * strength}px, ${dy * strength}px, 0)`;
-  };
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
+    const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
+    el.style.transform = `translate(${x}px, ${y}px)`;
+  }
 
-  const reset = () => {
-    if (ref.current) ref.current.style.transform = '';
-  };
+  function onMouseLeave() {
+    if (ref.current) ref.current.style.transform = 'translate(0, 0)';
+  }
 
   return (
-    <span
+    <div
       ref={ref}
-      onPointerMove={onMove}
-      onPointerLeave={reset}
-      className={`magnetic inline-block ${className}`}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      className="inline-block transition-transform duration-200 ease-out will-change-transform"
     >
       {children}
-    </span>
+    </div>
   );
 }
