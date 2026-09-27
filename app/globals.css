@@ -2,9 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Theme tokens ──────────────────────────────────────────
+   Dark is the default brand look. Light mode is applied by
+   setting data-theme="light" on <html> (see ThemeToggle.tsx) —
+   every bg-ink / text-bone / border-line / etc. class site-wide
+   reads these variables, so nothing else needs to change. */
 :root {
-  /* Dark theme (default) — RGB triplets so Tailwind's /opacity
-     modifiers (e.g. bg-ink/85) work on top of these variables. */
   --color-ink: 10 10 10;
   --color-void: 5 5 5;
   --color-bone: 242 241 236;
@@ -13,17 +16,31 @@
   --color-rust: 168 83 31;
 }
 
-[data-theme='light'] {
+:root[data-theme='light'] {
   --color-ink: 242 241 236;
-  --color-void: 228 227 220;
+  --color-void: 255 255 255;
   --color-bone: 10 10 10;
-  --color-smoke: 107 106 99;
-  --color-line: 216 215 208;
+  --color-smoke: 107 106 98;
+  --color-line: 222 220 212;
   --color-rust: 168 83 31;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Smooth crossfade when the theme switches, without touching
+   elements that already animate other properties (transform,
+   opacity for reveals/marquee/hover-zoom stay untouched). */
+body,
+header,
+footer,
+section,
+nav,
+a,
+button,
+.hairline {
+  transition: background-color 0.45s ease, border-color 0.45s ease, color 0.45s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -45,22 +62,6 @@ body {
   color: rgb(var(--color-bone));
   font-feature-settings: 'ss01' on, 'kern' on;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.4s ease, color 0.4s ease;
-}
-
-/* Logo swap: the white wordmark shows on the dark theme, the black
-   wordmark shows on the light theme. Pure CSS — no JS needed here. */
-.theme-logo-dark {
-  display: block;
-}
-.theme-logo-light {
-  display: none;
-}
-[data-theme='light'] .theme-logo-dark {
-  display: none;
-}
-[data-theme='light'] .theme-logo-light {
-  display: block;
 }
 
 ::selection {
@@ -107,93 +108,6 @@ body {
   text-wrap: balance;
 }
 
-/* ── Custom scrollbar ─────────────────────────────────────── */
-html {
-  scrollbar-width: thin;
-  scrollbar-color: rgb(var(--color-line)) rgb(var(--color-ink));
-}
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-::-webkit-scrollbar-track {
-  background: rgb(var(--color-ink));
-}
-::-webkit-scrollbar-thumb {
-  background: rgb(var(--color-line));
-  border-radius: 9999px;
-  border: 2px solid rgb(var(--color-ink));
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgb(var(--color-smoke));
-}
-
-/* ── Custom cursor (desktop / fine pointers only) ────────── */
-@media (pointer: fine) {
-  .custom-cursor-active,
-  .custom-cursor-active a,
-  .custom-cursor-active button {
-    cursor: none;
-  }
-}
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 6px;
-  height: 6px;
-  margin: -3px 0 0 -3px;
-  background: rgb(var(--color-bone));
-  border-radius: 9999px;
-  pointer-events: none;
-  z-index: 100;
-  mix-blend-mode: difference;
-}
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 34px;
-  height: 34px;
-  margin: -17px 0 0 -17px;
-  border: 1px solid rgb(var(--color-bone));
-  border-radius: 9999px;
-  pointer-events: none;
-  z-index: 99;
-  mix-blend-mode: difference;
-  transition: width 0.25s ease, height 0.25s ease, margin 0.25s ease, opacity 0.25s ease;
-}
-.cursor-ring--hover {
-  width: 56px;
-  height: 56px;
-  margin: -28px 0 0 -28px;
-  opacity: 0.65;
-}
-
-/* ── Page transition (fade + rise on route change) ───────── */
-.page-transition {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.page-transition--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cursor-dot,
-  .cursor-ring {
-    display: none;
-  }
-  .page-transition {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
-
 /* Auto-scrolling roster marquee: two copies of the track slide
    left continuously; hovering pauses it so people can read. */
 @keyframes marquee-scroll {
@@ -213,8 +127,77 @@ html {
   animation-play-state: paused;
 }
 
+/* Top announcement strip — a bit faster than the roster marquee since
+   the message is short and it should feel urgent, not lazy. */
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  animation: ticker-scroll 18s linear infinite;
+}
+
+.group:hover .animate-ticker {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee {
     animation: none;
   }
+}
+
+/* ── Logo swap ─────────────────────────────────────────────
+   The white logo shows on the default dark background; the
+   black one takes over automatically in light mode. Pure CSS,
+   no client component needed, so Nav/Footer stay server components. */
+.logo-dark {
+  display: block;
+}
+.logo-light {
+  display: none;
+}
+[data-theme='light'] .logo-dark {
+  display: none;
+}
+[data-theme='light'] .logo-light {
+  display: block;
+}
+
+/* ── Theme toggle icon ────────────────────────────────────── */
+.theme-toggle {
+  position: relative;
+}
+.theme-toggle svg {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.icon-sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+.icon-moon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+[data-theme='light'] .icon-sun {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+[data-theme='light'] .icon-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
 }

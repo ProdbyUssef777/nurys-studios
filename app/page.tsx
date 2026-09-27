@@ -1,19 +1,29 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import type { Metadata } from 'next';
 import { site } from '@/data/site';
 import { artists } from '@/data/artists';
-import { releases } from '@/data/releases';
+import { releases, visibleReleases, isReleased } from '@/data/releases';
 import { visuals } from '@/data/visuals';
 import Reveal from '@/components/Reveal';
 import RosterMarquee from '@/components/RosterMarquee';
 import ReleaseRow from '@/components/ReleaseRow';
 import VisualCard from '@/components/VisualCard';
-import KineticText from '@/components/KineticText';
-import Magnetic from '@/components/Magnetic';
-import Counter from '@/components/Counter';
+
+// Re-check every 5 minutes so a scheduled release (see `publishAt` in
+// data/releases.ts) appears here on its own, without a redeploy.
+export const revalidate = 300;
+
+export const metadata: Metadata = {
+  openGraph: { images: ['/img/journal/low-key-announcement.jpg'] },
+  twitter: { images: ['/img/journal/low-key-announcement.jpg'] },
+};
 
 export default function HomePage() {
-  const latestReleases = releases.slice(0, 3);
+  const latestReleases = visibleReleases().slice(0, 3);
   const featuredVisuals = visuals.slice(0, 4);
+  const lowKey = releases.find((r) => r.slug === 'low-key');
+  const lowKeyLive = lowKey ? isReleased(lowKey) : false;
 
   return (
     <>
@@ -35,9 +45,9 @@ export default function HomePage() {
           <p className="text-xs tracking-wide2 text-smoke">{site.legalLine}</p>
 
           <h1 className="mt-6 font-display text-display-xl font-bold tracking-tightest">
-            {site.tagline.map((line, i) => (
+            {site.tagline.map((line) => (
               <span key={line} className="block">
-                <KineticText text={line} baseDelay={i * 180} />
+                {line}
               </span>
             ))}
           </h1>
@@ -45,50 +55,56 @@ export default function HomePage() {
           <div className="mt-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <p className="text-sm text-bone/80 md:text-base">{site.direction}</p>
             <div className="flex flex-wrap gap-4">
-              <Magnetic>
-                <Link
-                  href="/about"
-                  className="inline-block border border-bone px-6 py-3 text-xs tracking-wide2 transition-colors duration-300 ease-editorial hover:bg-bone hover:text-ink"
-                >
-                  EXPLORE NURYS
-                </Link>
-              </Magnetic>
-              <Magnetic>
-                <Link
-                  href="/music"
-                  className="inline-block bg-bone px-6 py-3 text-xs tracking-wide2 text-ink transition-colors duration-300 ease-editorial hover:border hover:border-bone hover:bg-transparent hover:text-bone"
-                >
-                  LISTEN NOW
-                </Link>
-              </Magnetic>
+              <Link
+                href="/about"
+                className="border border-bone px-6 py-3 text-xs tracking-wide2 transition-colors duration-300 ease-editorial hover:bg-bone hover:text-ink"
+              >
+                EXPLORE NURYS
+              </Link>
+              <Link
+                href="/music"
+                className="bg-bone px-6 py-3 text-xs tracking-wide2 text-ink transition-colors duration-300 ease-editorial hover:bg-transparent hover:text-bone hover:border hover:border-bone"
+              >
+                LISTEN NOW
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── STATS ────────────────────────────────────────── */}
-      <section className="border-b border-line px-6 py-14 md:px-10 md:py-20">
-        <div className="mx-auto grid max-w-edge grid-cols-3 gap-6 text-center md:gap-10">
-          <div>
-            <p className="font-display text-display-md font-bold tracking-tightest">
-              <Counter target={artists.length} />
-            </p>
-            <p className="mt-2 text-xs tracking-wide2 text-smoke">Collective Members</p>
-          </div>
-          <div>
-            <p className="font-display text-display-md font-bold tracking-tightest">
-              <Counter target={releases.length} />
-            </p>
-            <p className="mt-2 text-xs tracking-wide2 text-smoke">Releases</p>
-          </div>
-          <div>
-            <p className="font-display text-display-md font-bold tracking-tightest">
-              <Counter target={visuals.length} />
-            </p>
-            <p className="mt-2 text-xs tracking-wide2 text-smoke">Visual Works</p>
-          </div>
-        </div>
-      </section>
+      {/* ── LATEST DROP ──────────────────────────────────── */}
+      {lowKey && (
+        <section className="border-b border-line px-6 py-14 md:px-10 md:py-20">
+          <Reveal>
+            <Link
+              href={lowKeyLive ? '/music' : '/journal'}
+              className="group flex flex-col items-start gap-8 md:flex-row md:items-center"
+            >
+              <div className="relative aspect-square w-full shrink-0 overflow-hidden bg-void md:w-48">
+                <Image
+                  src={lowKey.cover}
+                  alt={lowKey.title}
+                  fill
+                  sizes="(min-width: 768px) 192px, 100vw"
+                  className="object-cover transition-transform duration-700 ease-editorial group-hover:scale-105"
+                />
+              </div>
+              <div className="flex-1">
+                <p className="text-xs tracking-wide2 text-rust">
+                  {lowKeyLive ? 'OUT NOW' : 'OUT FRIDAY 25.09'}
+                </p>
+                <h3 className="mt-3 font-display text-3xl font-bold tracking-tightest md:text-4xl">
+                  {lowKey.title}
+                </h3>
+                <p className="mt-2 text-sm text-bone/70">{lowKey.artist}</p>
+                <p className="mt-6 text-sm text-bone/70 underline underline-offset-4 group-hover:text-bone">
+                  {lowKeyLive ? 'Listen now' : 'Read the announcement'}
+                </p>
+              </div>
+            </Link>
+          </Reveal>
+        </section>
+      )}
 
       {/* ── INTRO ────────────────────────────────────────── */}
       <section className="border-b border-line px-6 py-20 md:px-10 md:py-32">
@@ -188,22 +204,18 @@ export default function HomePage() {
             Build what&rsquo;s next.
           </h2>
           <div className="flex flex-wrap gap-4">
-            <Magnetic>
-              <Link
-                href="/contact"
-                className="inline-block bg-bone px-6 py-3 text-xs tracking-wide2 text-ink transition-colors duration-300 ease-editorial hover:border hover:border-bone hover:bg-transparent hover:text-bone"
-              >
-                WORK WITH NURYS
-              </Link>
-            </Magnetic>
-            <Magnetic>
-              <Link
-                href="/contact"
-                className="inline-block border border-bone px-6 py-3 text-xs tracking-wide2 transition-colors duration-300 ease-editorial hover:bg-bone hover:text-ink"
-              >
-                CONTACT
-              </Link>
-            </Magnetic>
+            <Link
+              href="/contact"
+              className="bg-bone px-6 py-3 text-xs tracking-wide2 text-ink transition-colors duration-300 ease-editorial hover:bg-transparent hover:text-bone hover:border hover:border-bone"
+            >
+              WORK WITH NURYS
+            </Link>
+            <Link
+              href="/contact"
+              className="border border-bone px-6 py-3 text-xs tracking-wide2 transition-colors duration-300 ease-editorial hover:bg-bone hover:text-ink"
+            >
+              CONTACT
+            </Link>
           </div>
         </div>
       </section>

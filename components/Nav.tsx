@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { nav, site } from '@/data/site';
 import MobileMenu from './MobileMenu';
 import ThemeToggle from './ThemeToggle';
-import Magnetic from './Magnetic';
 
 export default function Nav() {
   return (
@@ -14,14 +13,14 @@ export default function Nav() {
             src={site.logo.white}
             alt={site.name}
             fill
-            className="theme-logo-dark object-contain"
+            className="logo-dark object-contain"
             priority
           />
           <Image
             src={site.logo.black}
             alt={site.name}
             fill
-            className="theme-logo-light object-contain"
+            className="logo-light object-contain"
             priority
           />
         </Link>
@@ -38,20 +37,16 @@ export default function Nav() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 md:gap-5">
           <ThemeToggle />
-
           <div className="hidden md:block">
-            <Magnetic>
-              <Link
-                href="/music"
-                className="border border-bone px-5 py-2 text-xs tracking-wide2 text-bone transition-colors duration-300 ease-editorial hover:bg-bone hover:text-ink"
-              >
-                LISTEN
-              </Link>
-            </Magnetic>
+            <Link
+              href="/music"
+              className="border border-bone px-5 py-2 text-xs tracking-wide2 text-bone transition-colors duration-300 ease-editorial hover:bg-bone hover:text-ink"
+            >
+              LISTEN
+            </Link>
           </div>
-
           <MobileMenu />
         </div>
       </div>

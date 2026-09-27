@@ -1,4 +1,4 @@
-import BlurImage from './BlurImage';
+import Image from 'next/image';
 import Link from 'next/link';
 import type { Artist } from '@/data/artists';
 
@@ -6,7 +6,7 @@ export default function ArtistCard({ artist }: { artist: Artist }) {
   return (
     <Link href={`/artists#${artist.slug}`} className="group block">
       <div className="relative aspect-[4/5] overflow-hidden bg-void">
-        <BlurImage
+        <Image
           src={artist.image}
           alt={artist.name}
           fill
