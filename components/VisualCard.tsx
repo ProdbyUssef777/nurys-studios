@@ -1,15 +1,23 @@
 import BlurImage from './BlurImage';
 import type { Visual } from '@/data/visuals';
 
-export default function VisualCard({ visual }: { visual: Visual }) {
-  const Wrapper = visual.url ? 'a' : 'div';
+export default function VisualCard({
+  visual,
+  onClick,
+}: {
+  visual: Visual;
+  onClick?: () => void;
+}) {
+  const Wrapper = visual.url ? 'a' : onClick ? 'button' : 'div';
   const wrapperProps = visual.url
     ? { href: visual.url, target: '_blank', rel: 'noopener noreferrer' }
-    : {};
+    : onClick
+      ? { onClick, type: 'button' as const }
+      : {};
 
   return (
     <div className="group relative">
-      <Wrapper {...wrapperProps} className="block">
+      <Wrapper {...wrapperProps} className="block w-full text-left">
         <figure className="relative origin-center overflow-hidden bg-void shadow-none transition-all duration-500 ease-editorial group-hover:z-20 group-hover:scale-125 group-hover:shadow-2xl group-hover:shadow-black/60">
           <div className="relative w-full" style={{ aspectRatio: visual.aspect }}>
             <BlurImage

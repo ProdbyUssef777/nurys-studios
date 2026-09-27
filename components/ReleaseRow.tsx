@@ -1,7 +1,7 @@
 import BlurImage from './BlurImage';
 import type { Release } from '@/data/releases';
 import StreamingLinks from './StreamingLinks';
-import SpotifyEmbed from './SpotifyEmbed';
+import SpotifyPreview from './SpotifyPreview';
 
 const typeLabels: Record<Release['type'], string> = {
   single: 'Single',
@@ -34,13 +34,13 @@ export default function ReleaseRow({ release }: { release: Release }) {
         <p className="mt-1 text-xs text-smoke">{release.credits}</p>
         <div className="mt-3 md:hidden">
           <StreamingLinks links={release.links} />
-          {release.links.spotify && <SpotifyEmbed spotifyUrl={release.links.spotify} />}
+          {release.links.spotify && <SpotifyPreview spotifyUrl={release.links.spotify} />}
         </div>
       </div>
 
       <div className="col-span-2 hidden md:col-span-1 md:block">
         <StreamingLinks links={release.links} />
-        {release.links.spotify && <SpotifyEmbed spotifyUrl={release.links.spotify} />}
+        {release.links.spotify && <SpotifyPreview spotifyUrl={release.links.spotify} />}
       </div>
     </div>
   );
