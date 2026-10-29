@@ -28,6 +28,7 @@ export interface Release {
   year: number;
   type: ReleaseType;
   credits: string;
+  tracks?: { title: string; artists: string }[];
   cover: string;
   publishAt?: string;
   draft?: boolean;
@@ -41,18 +42,20 @@ export interface Release {
 }
 
 export const releases: Release[] = [
-  // Newest first. Both EPs are drafts until the cover art is added —
-  // drop the image in /public/img/releases/, set `cover`, remove `draft`.
+  // Newest first.
   {
     slug: 'faux-depart',
     title: 'Faux Départ',
-    artist: '24SNAKE',
+    artist: '24SNAKE ft. Ussef777',
     year: 2026,
     type: 'ep',
     credits: 'EP · 2 tracks',
+    tracks: [
+      { title: 'Faux', artists: '24SNAKE, Ussef777' },
+      { title: 'Départ', artists: '24SNAKE, Ussef777' },
+    ],
     cover: '/img/releases/faux-depart.jpg',
     publishAt: '2026-10-23T00:00:00+01:00',
-    draft: true,
     links: {
       spotify: 'https://open.spotify.com/album/5qmrlX1oCxtruzQkJ4sxtW',
     },
@@ -60,13 +63,20 @@ export const releases: Release[] = [
   {
     slug: 'b4u',
     title: 'B4U',
-    artist: '2mon666',
+    artist: '2mon666 ft. Ussef777, 24SNAKE, X2MOODY',
     year: 2026,
     type: 'ep',
     credits: 'EP · 6 tracks',
+    tracks: [
+      { title: 'LOW-KEY', artists: '2mon666, Ussef777' },
+      { title: 'T4Y3R', artists: '2mon666' },
+      { title: 'CHABA SABA7', artists: '2mon666, Ussef777' },
+      { title: 'RAGASA', artists: '2mon666, Ussef777' },
+      { title: 'XWIYA RAGER', artists: '2mon666, Ussef777' },
+      { title: 'TRIO 7M9 FKRO', artists: '2mon666, 24SNAKE, X2MOODY' },
+    ],
     cover: '/img/releases/b4u.jpg',
     publishAt: '2026-10-13T00:00:00+01:00',
-    draft: true,
     links: {
       spotify: 'https://open.spotify.com/album/4O5Tf2xO6MSU5IbrB65Grg',
     },
@@ -103,7 +113,7 @@ export const releases: Release[] = [
   {
     slug: 'placeholder-single-02',
     title: 'Untitled Session 02',
-    artist: '24SNAKE',
+    artist: '24SNAKE ft. Ussef777',
     year: 2026,
     type: 'single',
     credits: 'Produced by 2MON666',

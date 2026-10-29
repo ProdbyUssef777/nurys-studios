@@ -90,6 +90,20 @@ export default function ReleasePage({ params }: { params: { slug: string } }) {
               <p className="mt-2 text-base text-bone/70">{release.artist}</p>
               <p className="mt-6 max-w-md text-sm leading-relaxed text-smoke">{release.credits}</p>
 
+              {release.tracks && (
+                <ol className="mt-8 max-w-md divide-y divide-line border-y border-line">
+                  {release.tracks.map((t, i) => (
+                    <li key={t.title} className="flex items-baseline gap-4 py-3">
+                      <span className="w-5 text-xs text-smoke">{i + 1}</span>
+                      <span className="flex-1">
+                        <span className="block text-sm text-bone">{t.title}</span>
+                        <span className="block text-xs text-smoke">{t.artists}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              )}
+
               <div className="mt-10">
                 {live ? (
                   <>
