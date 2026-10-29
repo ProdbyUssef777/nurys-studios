@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import type { Metadata } from 'next';
 import { site } from '@/data/site';
 import { artists } from '@/data/artists';
 import { releases, visibleReleases, isReleased } from '@/data/releases';
@@ -13,11 +12,6 @@ import VisualCard from '@/components/VisualCard';
 // Re-check every 5 minutes so a scheduled release (see `publishAt` in
 // data/releases.ts) appears here on its own, without a redeploy.
 export const revalidate = 300;
-
-export const metadata: Metadata = {
-  openGraph: { images: ['/img/journal/low-key-announcement.jpg'] },
-  twitter: { images: ['/img/journal/low-key-announcement.jpg'] },
-};
 
 export default function HomePage() {
   const latestReleases = visibleReleases().slice(0, 3);

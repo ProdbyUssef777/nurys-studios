@@ -19,13 +19,13 @@ export const metadata: Metadata = {
     url: site.url,
     siteName: site.name,
     type: 'website',
-    images: ['/img/hero-bg.svg'],
+    images: [{ url: '/img/og-default.jpg', width: 1200, height: 630, alt: 'NURYS STUDIOS' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: site.seoTitle,
     description: site.description,
-    images: ['/img/hero-bg.svg'],
+    images: [{ url: '/img/og-default.jpg', width: 1200, height: 630, alt: 'NURYS STUDIOS' }],
   },
 };
 

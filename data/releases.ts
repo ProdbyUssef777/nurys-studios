@@ -41,6 +41,36 @@ export interface Release {
 }
 
 export const releases: Release[] = [
+  // Newest first. Both EPs are drafts until the cover art is added —
+  // drop the image in /public/img/releases/, set `cover`, remove `draft`.
+  {
+    slug: 'faux-depart',
+    title: 'Faux Départ',
+    artist: '24SNAKE',
+    year: 2026,
+    type: 'ep',
+    credits: 'EP · 2 tracks',
+    cover: '/img/releases/faux-depart.jpg',
+    publishAt: '2026-10-23T00:00:00+01:00',
+    draft: true,
+    links: {
+      spotify: 'https://open.spotify.com/album/5qmrlX1oCxtruzQkJ4sxtW',
+    },
+  },
+  {
+    slug: 'b4u',
+    title: 'B4U',
+    artist: '2mon666',
+    year: 2026,
+    type: 'ep',
+    credits: 'EP · 6 tracks',
+    cover: '/img/releases/b4u.jpg',
+    publishAt: '2026-10-13T00:00:00+01:00',
+    draft: true,
+    links: {
+      spotify: 'https://open.spotify.com/album/4O5Tf2xO6MSU5IbrB65Grg',
+    },
+  },
   {
     slug: 'low-key',
     title: 'LOW-KEY',
