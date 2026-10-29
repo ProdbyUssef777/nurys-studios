@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { site } from '@/data/site';
 import { artists } from '@/data/artists';
-import { releases, visibleReleases, isReleased } from '@/data/releases';
+import { visibleReleases } from '@/data/releases';
 import { visuals } from '@/data/visuals';
 import Reveal from '@/components/Reveal';
 import RosterMarquee from '@/components/RosterMarquee';
@@ -16,8 +16,6 @@ export const revalidate = 300;
 export default function HomePage() {
   const latestReleases = visibleReleases().slice(0, 3);
   const featuredVisuals = visuals.slice(0, 4);
-  const lowKey = releases.find((r) => r.slug === 'low-key');
-  const lowKeyLive = lowKey ? isReleased(lowKey) : false;
 
   return (
     <>
@@ -67,38 +65,35 @@ export default function HomePage() {
       </section>
 
       {/* ── LATEST DROP ──────────────────────────────────── */}
-      {lowKey && (
-        <section className="border-b border-line px-6 py-14 md:px-10 md:py-20">
-          <Reveal>
-            <Link
-              href={lowKeyLive ? '/music' : '/journal'}
-              className="group flex flex-col items-start gap-8 md:flex-row md:items-center"
-            >
-              <div className="relative aspect-square w-full shrink-0 overflow-hidden bg-void md:w-48">
-                <Image
-                  src={lowKey.cover}
-                  alt={lowKey.title}
-                  fill
-                  sizes="(min-width: 768px) 192px, 100vw"
-                  className="object-cover transition-transform duration-700 ease-editorial group-hover:scale-105"
-                />
-              </div>
-              <div className="flex-1">
-                <p className="text-xs tracking-wide2 text-rust">
-                  {lowKeyLive ? 'OUT NOW' : 'OUT FRIDAY 25.09'}
-                </p>
-                <h3 className="mt-3 font-display text-3xl font-bold tracking-tightest md:text-4xl">
-                  {lowKey.title}
-                </h3>
-                <p className="mt-2 text-sm text-bone/70">{lowKey.artist}</p>
-                <p className="mt-6 text-sm text-bone/70 underline underline-offset-4 group-hover:text-bone">
-                  {lowKeyLive ? 'Listen now' : 'Read the announcement'}
-                </p>
-              </div>
-            </Link>
-          </Reveal>
-        </section>
-      )}
+      <section className="border-b border-line px-6 py-14 md:px-10 md:py-20">
+        <div className="mx-auto grid max-w-edge gap-12 md:grid-cols-2">
+          {latestReleases.slice(0, 2).map((r) => (
+            <Reveal key={r.slug}>
+              <Link
+                href={`/music/${r.slug}`}
+                className="group flex flex-col items-start gap-6 sm:flex-row sm:items-center"
+              >
+                <div className="relative aspect-square w-full shrink-0 overflow-hidden bg-void sm:w-44">
+                  <Image
+                    src={r.cover}
+                    alt={r.title}
+                    fill
+                    sizes="(min-width: 640px) 176px, 100vw"
+                    className="object-cover transition-transform duration-700 ease-editorial group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-display text-3xl font-bold tracking-tightest">{r.title}</h3>
+                  <p className="mt-2 text-sm text-bone/70">{r.artist}</p>
+                  <p className="mt-6 text-sm text-bone/70 underline underline-offset-4 group-hover:text-bone">
+                    Listen now
+                  </p>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </section>
 
       {/* ── INTRO ────────────────────────────────────────── */}
       <section className="border-b border-line px-6 py-20 md:px-10 md:py-32">
